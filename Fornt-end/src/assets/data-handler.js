@@ -7,7 +7,6 @@ const  getShortUrl = async() => {
         const res = await fetch(`${API_HOST}`, {
         })
         if (res.ok) {
-            console.log("test");
             const url = res.json()
             return url
         }

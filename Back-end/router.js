@@ -1,46 +1,42 @@
 const express = require('express')
 const router = express.Router()
+const validate = require("validate.js");
 const ShortUrl = require('./shortUrl.js')
-const service = require('./service')
-const QRCode = require('qrcode')
+
+const validateUrl = (url = "") => {
+    return validate({ website: url }, {
+        website: {
+            url: {
+                allowLocal: true
+            }
+        }
+    });
+}
 
 router.get('/shortUrls' , async (req, res)=> {
-
-    console.log("home");
     const shortUrls = await ShortUrl.find()
-    res.json(shortUrls)
+    res.json(shortUrls).status(200)
 })
 
 router.post('/shortUrls', async (req,res)=> {
-    console.log(req.body);
     const { fullUrl } = req.body;
-    console.log(fullUrl);
-    if (!fullUrl) {
-        return res.status(400).json({ error: 'URL is required' })
+    if (!fullUrl || validateUrl(fullUrl)) {
+        return res.status(400).json({ error: 'Invalid URL' })
     }
     
     const existingUrl = await ShortUrl.findOne({ full: fullUrl })
     if (existingUrl) {
         res.send(existingUrl);
     } else {
-        // const id = shortId.generate
-        // const qrCodeUrl = ""
-        // QRCode.toDataURL(id, (err, qrCodeUrl) => {
-        //     if(err) {
-        //         return res.status(500).json({ error: 'QR code generation error' })
-        //     }  
-        //     qrCodeUrl = qrCodeUrl
-        // })
         const newUrl = await ShortUrl.create({full: fullUrl})
         res.send(newUrl).status(200)
     }
 })
 
 router.get('/shortUrls/:shortUrl', async (req,res)=> {
-    console.log(req.params);
     const shortUrl = await ShortUrl.findOne({short: req.params.shortUrl })
     if(shortUrl === null) {
-        return res.sendStatus(404)
+        return res.sendStatus(404).json({ error: 'cannot find URL' })
     }
     shortUrl.clicks++
     shortUrl.save()

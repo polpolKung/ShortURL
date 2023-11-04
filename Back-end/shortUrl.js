@@ -3,10 +3,7 @@ const shortId = require('shortid')
 require('dotenv').config()
 
 const dbUrl= process.env.MONGO_URI
-mongoose.connect(dbUrl, {
-    // useNewUrlParser: true,
-    // useUnifiedTopology: true
-}).catch(err=>console.log(err))
+mongoose.connect(dbUrl, {}).catch(err=>console.log(err))
 
 const shorUrlSchema = new mongoose.Schema({
     full: {

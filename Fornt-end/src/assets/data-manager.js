@@ -6,7 +6,6 @@ const fullUrl = ref("")
 const urlObj = ref(null)
 
 const fetchUrl = async ()=> {
-    console.log("fetch");
     urlItems.value = await getShortUrl()
 }
 
