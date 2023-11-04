@@ -3,7 +3,7 @@ import HomePage from '../components/HomePage.vue'
 import LinkPage from '../components/LinkPage.vue'
 import PageNotfound from '../components/PageNotfound.vue'
 
-const history = createWebHistory()
+const history = createWebHistory(process.env.BASE_URL)
 const routes = [
     {
         path: '/',

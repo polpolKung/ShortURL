@@ -87,7 +87,7 @@ const saveImg = () => {
             <div v-if="urlObj !== null" class="mb-3">
                 <div class="flex bg-emerald-700 p-3 rounded-2xl">
                     <div class="flex items-center justify-center">
-                        <a class="text-white" :href="urlObj.short" target="_blank">{{ baseUrl }}{{ urlObj.short }}</a>
+                        <router-link :to="{ name: 'LinkPage', params: { id: urlObj.short } }" target="_blank"><a class="text-white" :href="urlObj.short" target="_blank">{{ baseUrl }}{{ urlObj.short }}</a></router-link>
                     </div>
                     <div class="mx-3">
                         <button type="button" 
@@ -122,7 +122,7 @@ const saveImg = () => {
                     <tbody v-for="(item) in urlItems">
                         <tr class="text-center">
                             <td><a class="p-2 text-white" :href="item.full" target="_blank">{{ item.full }}</a></td>
-                            <td><a class="p-2 text-white" :href="item.short" target="_blank" >{{ baseUrl }}{{ item.short }}</a></td>
+                            <td><router-link :to="{ name: 'LinkPage', params: { id: item.short } }" target="_blank"><a class="p-2 text-white" :href="item.short" target="_blank" >{{ baseUrl }}{{ item.short }}</a></router-link></td>
                             <td class="p-2">{{ item.clicks }}</td>
                             <td class="p-2 flex justify-center ">
                                 <button class="transition  ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 bg-green-900 hover:bg-green-950 p-2 rounded-lg mr-2"
