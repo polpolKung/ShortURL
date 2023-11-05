@@ -2,7 +2,7 @@
 ***วิธีการติดตั้ง***
 
 > จะมี directory ที่เป็นส่วนของ "Front-end" และ "Back-end" แยกกัน  
-> จำเป็นต้องติดตั้ง package ในทั้งสอง directory
+> จำเป็นต้องติดตั้ง package ในทั้งสอง directory  
 > Data Flow Diagram และ ER Diagram อยู่ใน directory "Diagrams"    
 
 
