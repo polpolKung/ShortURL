@@ -1,4 +1,4 @@
-import axios from 'axios'
+import router from '../router/router.js'
 
 const API_HOST = import.meta.env.VITE_ROOT_API + "/api/shortUrls"
 
@@ -23,7 +23,9 @@ const  getShortUrlById = async(id) => {
         })
         if (res.ok) {
             const redirectURL = await res.text()
-            window.location.href = redirectURL;
+            window.location.href = redirectURL
+        } else if(res.status === 404) {
+            router.push({ name: 'PageNotfound', params: { notfoundpath: id} })
         }
         else throw new Error('Error, data is error!')
     } catch (error) {

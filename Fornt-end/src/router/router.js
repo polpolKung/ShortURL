@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../components/HomePage.vue'
 import LinkPage from '../components/LinkPage.vue'
-import PageNotfound from '../components/PageNotfound.vue'
+import PageNotfound from '../components/PageNotfound.vue' 
 
-const history = createWebHistory(process.env.BASE_URL)
+const history = createWebHistory(import.meta.env.BASE_URL)
 const routes = [
     {
         path: '/',
