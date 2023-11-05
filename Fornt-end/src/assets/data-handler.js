@@ -36,7 +36,6 @@ const  getShortUrlById = async(id) => {
 
 const  createShortUrl = async(full) => {
     try {
-        console.log(JSON.stringify(full));
         const res = await fetch(`${API_HOST}`, {
             method: 'POST',
             body: JSON.stringify(full),
@@ -47,6 +46,8 @@ const  createShortUrl = async(full) => {
         if (res.ok) {
             const url = await res.json()
             return url
+        } else if (res.status === 400) {
+            return false
         }
         else throw new Error('Error, data is error!')
     } catch (error) {
